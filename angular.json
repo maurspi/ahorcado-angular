@@ -19,7 +19,7 @@
           "options": {
             "outputPath": "dist/ahorcado-angular",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "main": "src/main.ts", 
             "polyfills": [
               "zone.js"
             ],
@@ -30,8 +30,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/app.component.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -39,7 +45,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "800kb",
                   "maximumError": "1mb"
                 },
                 {

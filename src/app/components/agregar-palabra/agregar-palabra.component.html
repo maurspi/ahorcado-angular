@@ -1,0 +1,33 @@
+<div class="container">
+    <h1 class="tituloJuego">Juego del Ahorcado</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h3>Agregar Palabras Nuevas</h3>
+            <form>
+              <div class="mb-3">
+                <label for="nuevaPalabra" class="form-label">Ingresa una nueva palabra</label>
+                <input type="text" class="form-control" id="nuevaPalabra" [(ngModel)]="palabraNueva" [ngModelOptions]="{standalone: true}">
+              </div>
+              <button (click)="AgregarPalabra()" type="button" class="btn btn-primary me-2">Agregar</button>
+            </form>
+  
+            <div *ngIf="alertOk" class="alert alert-success mt-3" role="alert">
+              Palabra Agregada!
+            </div>
+  
+            <div *ngIf="alertErr" class="alert alert-danger mt-3" role="alert">
+              Ups!.. Ocurrió un error!
+            </div>
+  
+            <label>
+              Palabras Disponibles en BD
+              <p>{{arrPalabras | json}}</p>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

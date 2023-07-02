@@ -6,5 +6,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ahorcado-angular';
+  title = 'ahorcadoAngular';
+  arrCoincidencias = []; // esto es para corregir!
+  palabraAdivinar = '';
+
+  componenteAgregar = false;
+  componenteJugar = true;
+
+  constructor(){
+
+  }
+
+  agregarPalabras(){
+    this.componenteAgregar = true;
+    this.componenteJugar = false;
+  }
+
+  regresarJuego(){
+    this.componenteAgregar = false;
+    this.componenteJugar = true;
+  }
 }
