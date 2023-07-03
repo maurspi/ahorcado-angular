@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PalabraService } from 'src/app/providers/palabra.service';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 @Component({
   selector: 'app-ingresar-palabra',
   templateUrl: './ingresar-palabra.component.html',
   styleUrls: ['./ingresar-palabra.component.scss']
 })
-export class IngresarPalabraComponent {
+export class IngresarPalabraComponent implements OnInit {
   arrCoincidencias: string[] = [];
   arrAdivinar: string[] = [];
   intentos: string[] = [];
@@ -20,20 +22,30 @@ export class IngresarPalabraComponent {
     '../../../assets/images/img7.png',
   ];
   title = 'ahorcadoAngular';
-  palabraAdivinar= '';
+  palabraAdivinar = '';
   letra = '';
   idx = 0;
   input = true;
   juegoTerminado = false;
   juegoGanado = false;
 
-  constructor(private db: PalabraService) {
-    /*this.db.getConexion().then(() => {
-      console.log('conexion exitosa!');
-      this.setPalabra(this.db.getPalabraAleatoria());
+  constructor(private db: PalabraService) {}
+
+  ngOnInit() {
+    this.db.getConexion().then(() => {
+      console.log('¡Conexión exitosa!');
     }).catch((err) => {
       console.log(err);
-    });*/
+    });
+  }
+
+  guardarPalabra() {
+    const palabra = this.palabraAdivinar.toLowerCase();
+    const database = firebase.database();
+    const palabrasRef = database.ref('palabras');
+
+    palabrasRef.push(palabra);
+    this.setPalabra(palabra);
   }
 
   setPalabra(palabra: string) {
@@ -81,11 +93,9 @@ export class IngresarPalabraComponent {
     if (this.idx > 5) {
       this.juegoTerminado = true;
       this.input = false;
-      this.ganarJuego(); // Llamada a ganarJuego() solo si el juego no ha terminado -- CORRECTO FUNCIONA OK!!
+      this.ganarJuego();
     }
   }
-  
-  
 
   ganarJuego() {
     const ganar = !this.arrCoincidencias.includes('?');
@@ -94,6 +104,4 @@ export class IngresarPalabraComponent {
       this.juegoGanado = true;
     }
   }
-  
-  
 }

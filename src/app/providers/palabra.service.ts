@@ -12,12 +12,12 @@ export class PalabraService {
 
   constructor(private afs: AngularFireDatabase) {
 
-    // this.getConexion().then( ()=>{
-    //   console.log('conexion exitosa!');
-    //   this.getBD();
-    // }).catch( (err)=>{
-    //   console.log(err);
-    // });
+    this.getConexion().then( ()=>{
+       console.log('conexion exitosa!');
+       this.getBD();
+     }).catch( (err)=>{
+       console.log(err);
+     });
   }
 
   getBD(){
